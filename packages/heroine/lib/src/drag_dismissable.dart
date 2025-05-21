@@ -220,9 +220,11 @@ class _DragDismissableState extends State<DragDismissable> {
   void _cancel() {
     HeroinePageRoute.maybeOf<dynamic>(context)?.cancelDismiss();
     _stopUserGesturePostFrame();
-    setState(() {
-      _dragStartOffset = null;
-      _offset = Offset.zero;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        _dragStartOffset = null;
+        _offset = Offset.zero;
+      });
     });
   }
 
